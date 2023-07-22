@@ -367,9 +367,10 @@ namespace Demo.Controllers
                 if (ModelState.IsValid)
                 {
                     String data = JsonConvert.SerializeObject(model);
+                    Debug.WriteLine(data);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = client.PutAsync(client.BaseAddress + "updateuserdetails&id=" + model.id, content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updateuserdetails&id=" + model.id, content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;
