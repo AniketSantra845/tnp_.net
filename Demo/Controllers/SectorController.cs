@@ -194,9 +194,13 @@ namespace Demo.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    model.status = 0;
+                    model.remarks = "";
+                    model.created_at = DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss");
+                    model.updated_at = DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss");
                     String data = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PutAsync(client.BaseAddress + "update_sector&id=" + model.id, content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "update_sector&id=" + model.id, content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;

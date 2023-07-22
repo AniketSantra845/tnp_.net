@@ -95,7 +95,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "updatestudentdetails&id="+@context.HttpContext.Session.GetInt32("studentid")  , content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updatestudentdetails&id="+@context.HttpContext.Session.GetInt32("studentid")  , content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
@@ -141,7 +141,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "editten_details&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "editten_details&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
@@ -187,7 +187,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "editstudent_twelve_data&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "editstudent_twelve_data&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
@@ -233,7 +233,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "editstudent_ug_data&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "editstudent_ug_data&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
@@ -281,7 +281,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "editstudent_pg_data&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "editstudent_pg_data&id=" + @context.HttpContext.Session.GetInt32("studentid"), content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
@@ -482,7 +482,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "updateinternship&id=" + model.id, content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updateinternship&id=" + model.id, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
@@ -599,7 +599,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "updateWorkExperiance&id=" + model.id, content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updateWorkExperiance&id=" + model.id, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
@@ -715,7 +715,7 @@ namespace Demo.Controllers
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "updateAddtionalQualification&id=" + model.id, content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updateAddtionalQualification&id=" + model.id, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String result = response.Content.ReadAsStringAsync().Result;
