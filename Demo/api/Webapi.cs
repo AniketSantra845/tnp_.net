@@ -23,11 +23,6 @@ namespace Demo.api
             return response;
         }
 
-
-
-
-
-
         // Uri baseAddress = new Uri("https://tnpdeveloper.000webhostapp.com/api/api_modify.php?what=");
 
     }
