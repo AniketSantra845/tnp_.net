@@ -3,16 +3,16 @@
 @foreach (var item in Model)
 {
     <p id="dispText">
-        Minimum Stipend: @item.min_stipend
+        Minimum Stipend: <b>@item.min_stipend</b>
     </p>
     <p id="dispText">
-        Maximum Stipend: @item.max_stipend
+        Maximum Stipend: <b>@item.max_stipend</b>
     </p>
     <p id="dispText">
-        Minimum Salary: @item.min_salary
+        Minimum Salary: <b>@item.min_salary</b>
     </p>
     <p id="dispText">
-        Maximum Salary: @item.max_salary
+        Maximum Salary:<b> @item.max_salary</b>
     </p>
     <p id="dispText">
         <b>Actual date of joining: </b>
@@ -22,8 +22,8 @@
             string convertedDate = date.ToString("dd MMMM, yyyy");
             Console.WriteLine(convertedDate);
             }
-            @convertedDate
-       
+        <b>@convertedDate</b>
+
     </p>
 }
 
