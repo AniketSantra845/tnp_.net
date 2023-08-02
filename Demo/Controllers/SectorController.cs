@@ -135,7 +135,7 @@ namespace Demo.Controllers
                     String data = JsonConvert.SerializeObject(model);
                     Debug.WriteLine(data);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "set_single_sector", content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "sectordetails", content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;
@@ -200,7 +200,7 @@ namespace Demo.Controllers
                     model.updated_at = DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss");
                     String data = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "update_sector&id=" + model.id, content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "sectordetails&id=" + model.id, content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;

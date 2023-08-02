@@ -493,7 +493,7 @@ namespace Demo.Controllers
                     Debug.WriteLine(data);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updatehiringdetails&id=" + model.Hiring.id, content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "addhiringdetails&id=" + model.Hiring.id, content).Result;
                 if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;

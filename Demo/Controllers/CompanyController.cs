@@ -138,7 +138,7 @@ namespace Demo.Controllers
                     String data = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updatecompanydetails&id=" + model.id, content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "companydetails&id=" + model.id, content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;
