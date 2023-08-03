@@ -17,7 +17,8 @@ namespace Demo.Controllers
         {
             Webapi wb = new Webapi();
             System.Uri baseAddress = wb.api();
-            client = new HttpClient();
+            var handler = new HttpClientHandler() { UseProxy = false };
+            client = new HttpClient(handler);
             client.BaseAddress = baseAddress;
             context = httpContextAccessor;
             this.emailSender = emailSender;
