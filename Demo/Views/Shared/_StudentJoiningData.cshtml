@@ -1,0 +1,30 @@
+﻿@model List<StudentApplication>
+
+@foreach (var item in Model)
+{
+    <p id="dispText">
+        Minimum Stipend: <b>@item.min_stipend</b>
+    </p>
+    <p id="dispText">
+        Maximum Stipend: <b>@item.max_stipend</b>
+    </p>
+    <p id="dispText">
+        Minimum Salary: <b>@item.min_salary</b>
+    </p>
+    <p id="dispText">
+        Maximum Salary:<b> @item.max_salary</b>
+    </p>
+    <p id="dispText">
+        <b>Actual date of joining: </b>
+            @{string dateString = item.date_of_joining;
+            DateTime date = DateTime.Parse(dateString);
+
+            string convertedDate = date.ToString("dd MMMM, yyyy");
+            Console.WriteLine(convertedDate);
+            }
+        <b>@convertedDate</b>
+
+    </p>
+}
+
+

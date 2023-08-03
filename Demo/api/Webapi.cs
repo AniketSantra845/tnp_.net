@@ -6,8 +6,9 @@ namespace Demo.api
     {
         HttpClient client;
         HttpResponseMessage response;
-        // Uri baseAddress = new Uri("https://tnpdeveloper.000webhostapp.com/api/api_modify.php?what=");
-        Uri baseAddress = new Uri("http://127.0.0.1/api/api_modify.php?what=");
+        //Uri baseAddress = new Uri("http://127.0.0.1//api/api_modify.php?what=");
+        Uri baseAddress = new Uri("https://tnpdeveloper.000webhostapp.com/api/api_modify.php?what=");
+        //Uri baseAddress = new Uri("https://tnp.srlimba.ac.in/srl/api_modify.php?what=");
 
         public System.Uri api()
         {   
@@ -22,11 +23,7 @@ namespace Demo.api
             return response;
         }
 
-
-
-
-
-
+        // Uri baseAddress = new Uri("https://tnpdeveloper.000webhostapp.com/api/api_modify.php?what=");
 
     }
 }

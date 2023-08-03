@@ -9,7 +9,5 @@
         public IEnumerable<Hiring_Departments> hiring_Departments { get; set; }
         public IEnumerable<StudentApplication> applications { get; set; }
 
-
-
     }
 }

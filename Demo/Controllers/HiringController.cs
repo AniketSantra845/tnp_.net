@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using NuGet.DependencyResolver;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -151,7 +152,6 @@ namespace Demo.Controllers
                 return RedirectToAction("Login", "User");
             }
         }
-
         public IActionResult HiringCompanies()
         {
             if (@context.HttpContext.Session.GetInt32("role") == 1)
@@ -221,10 +221,18 @@ namespace Demo.Controllers
                         {
                             var Student = new StudentApplication
                             {
+                                id = student.id,
                                 student_id = student.student_id,
                                 hiring_id = student.hiring_id,
+                                min_stipend = student.min_stipend,
+                                max_stipend = student.max_stipend,
+                                min_salary = student.min_salary,
+                                max_salary = student.max_salary,
+                                date_of_joining = student.date_of_joining,
                                 status = student.status,
-                                created_at = student.created_at
+                                created_at = student.created_at,
+                                updated_at = student.updated_at
+
                             };
                             studentApplicationModel.Add(Student);
                         }
@@ -485,7 +493,7 @@ namespace Demo.Controllers
                     Debug.WriteLine(data);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "updatehiringdetails&id=" + model.Hiring.id, content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "addhiringdetails&id=" + model.Hiring.id, content).Result;
                 if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;
@@ -617,32 +625,24 @@ namespace Demo.Controllers
             }
             return View();
         }
-
-        public IActionResult test()
+        [HttpGet]
+        public IActionResult StudentJoiningData(int hid, int sid)
         {
-            if (@context.HttpContext.Session.GetInt32("role") == 2)
+            List<StudentApplication> students = new List<StudentApplication>();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "get_student_application&sid=" + sid + "&hid=" + hid).Result;
+            if (response.IsSuccessStatusCode)
             {
-                List<StudentApplication> model = new List<StudentApplication>();
-
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "getstduentapplication").Result;
-                if (response.IsSuccessStatusCode)
+                String data = response.Content.ReadAsStringAsync().Result;
+                var student = JsonDecode.FromJson(data);
+                if (student.Success)
                 {
-                    String data = response.Content.ReadAsStringAsync().Result;
-                    var applications = JsonDecode.FromJson(data);
-                    Debug.WriteLine(applications);
-                    foreach (var application in applications.applications)
+                    foreach (var std in student.applications)
                     {
-                        model.Add(application);
+                        students.Add(std);
                     }
                 }
-                return View(model);
             }
-            else
-            {
-                TempData["serror"] = "You have to login with co-ordinator id and password to access the page.";
-                DestorySession();
-                return RedirectToAction("Login", "User");
-            }
+            return PartialView("_StudentJoiningData", students);
         }
     }
 }

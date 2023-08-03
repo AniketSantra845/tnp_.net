@@ -140,7 +140,7 @@ namespace Demo.Controllers
                     String data = JsonConvert.SerializeObject(model);
                     Debug.WriteLine(data);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "set_single_department", content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "departmentdetails", content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;
@@ -224,13 +224,27 @@ namespace Demo.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    model.status = 0;
+                    model.remarks = "";
+                    model.created_at = DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss");
+                    model.updated_at = DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss");
                     String data = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PutAsync(client.BaseAddress + "update_department&id=" + model.id, content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "departmentdetails&id=" + model.id, content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;
-                        TempData["success"] = "Department Updated";
+                        Debug.WriteLine(result);
+                        var msg = JsonDecode.FromJson(data);
+                        Debug.WriteLine(msg);
+                        if (msg.Success)
+                        {
+                            TempData["success"] = msg.message;
+                        }
+                        else
+                        {
+                            TempData["error"] = msg.message;
+                        }
                         return RedirectToAction("View_Department");
                     }
                     return View();
