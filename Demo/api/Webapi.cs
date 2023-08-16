@@ -5,25 +5,21 @@ namespace Demo.api
     public class Webapi
     {
         HttpClient client;
-        HttpResponseMessage response;
         Uri baseAddress = new Uri("http://127.0.0.1//api/api_modify.php?what=");
         //Uri baseAddress = new Uri("https://tnpdeveloper.000webhostapp.com/api/api_modify.php?what=");
         //Uri baseAddress = new Uri("https://tnp.srlimba.ac.in/srl/api_modify.php?what=");
 
-        public System.Uri api()
-        {   
-            return baseAddress;
-        }
 
-        public HttpResponseMessage responses(StringContent content)
+        public HttpClient response()
         {
-            client = new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler() { UseProxy = false };
+            client = new HttpClient(handler);
             client.BaseAddress = baseAddress;
-            response = client.PostAsync(client.BaseAddress + "getlogin", content).Result;
-            return response;
+            return client;
         }
 
-        // Uri baseAddress = new Uri("https://tnpdeveloper.000webhostapp.com/api/api_modify.php?what=");
+
+
 
     }
 }

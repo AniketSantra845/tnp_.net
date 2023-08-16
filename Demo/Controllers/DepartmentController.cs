@@ -27,9 +27,7 @@ namespace Demo.Controllers
         public DepartmentController(IHttpContextAccessor httpContextAccessor)
         {
             Webapi wb = new Webapi();
-            System.Uri baseAddress = wb.api();
-            client = new HttpClient();
-            client.BaseAddress = baseAddress;
+            client = wb.response();
             context = httpContextAccessor;
         }
         public void DestorySession()

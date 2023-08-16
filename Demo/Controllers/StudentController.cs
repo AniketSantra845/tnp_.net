@@ -20,9 +20,7 @@ namespace Demo.Controllers
 		public StudentController(IHttpContextAccessor httpContextAccessor)
         {
             Webapi wb = new Webapi();
-            System.Uri baseAddress = wb.api();
-            client = new HttpClient();
-            client.BaseAddress = baseAddress;
+            client = wb.response();
             context = httpContextAccessor;
         }
         public void DestorySession()

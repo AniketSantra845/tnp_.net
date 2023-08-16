@@ -22,9 +22,7 @@ namespace Demo.Controllers
         public HiringController(IHttpContextAccessor httpContextAccessor)
         {
             Webapi wb = new Webapi();
-            System.Uri baseAddress = wb.api();
-            client = new HttpClient();
-            client.BaseAddress = baseAddress;
+            client = wb.response();
             context = httpContextAccessor;
         }
         public void DestorySession()
@@ -296,7 +294,7 @@ namespace Demo.Controllers
         }
 
 
-        public IActionResult CordHiringCompanies()
+    public IActionResult CordHiringCompanies()
         {
             if (@context.HttpContext.Session.GetInt32("role") == 2)
             {
@@ -589,7 +587,7 @@ namespace Demo.Controllers
             return View();
         }
 
-        public IActionResult pendingshortlisted(int id, int sid, int hid, IFormCollection collection)
+        public IActionResult pendingshortlisted(int id, int app_id, IFormCollection collection)
         {
             if (@context.HttpContext.Session.GetInt32("role") == 2)
             {
@@ -608,7 +606,7 @@ namespace Demo.Controllers
                             };
                 String data = JsonConvert.SerializeObject(pairs);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "pendingshortlist&sid=" + sid + "&id=" + id + "&hid=" + hid, content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "pendingshortlist&app_id=" + app_id + "&id=" + id, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     String res = response.Content.ReadAsStringAsync().Result;

@@ -21,9 +21,7 @@ namespace Demo.Controllers
         public CompanyController(IHttpContextAccessor httpContextAccessor)
         {
             Webapi wb = new Webapi();
-            System.Uri baseAddress = wb.api();
-            client = new HttpClient();
-            client.BaseAddress = baseAddress;
+            client = wb.response();
             context = httpContextAccessor;
         }
         public void DestorySession()
@@ -33,6 +31,30 @@ namespace Demo.Controllers
             context.HttpContext.Session.Remove("sessionid");
             context.HttpContext.Session.Remove("studentid");
         }
+
+        [HttpGet]
+        public IActionResult validCompany(String cif)
+        {
+            bool isValid = true;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "valid_company&cif=" + cif).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                String data = response.Content.ReadAsStringAsync().Result;
+                var msg = JsonDecode.FromJson(data);
+                if (msg.Success)
+                {
+                    isValid = msg.Success;
+                }
+                else
+                {
+                    isValid = msg.Success;
+                }
+            }
+
+            return Json(new { isValid });
+        }
+
+
         public IActionResult Index()
         {
             if (@context.HttpContext.Session.GetInt32("role") == 2)

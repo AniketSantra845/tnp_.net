@@ -57,14 +57,14 @@
                                     <tbody>
                                        
                                         @foreach (var stud in Model.students)
-                                            {
+                                        {
                                                 @foreach (var hd in Model.hiring_Departments)
                                                 {
                                                     @foreach (var item in Model.Hirings)
                                                     {
                                                         if (stud.department_id == hd.department_id && hd.hiring_id == item.id)
                                                         {
-                                                            <tr>
+                                            <tr>
                                                                 @foreach (var company in Model.Companies)
                                                                 {
                                                                     if (item.company_id == company.id)
@@ -80,45 +80,44 @@
                                                                     }
                                                                 }
 
-                                                                <td>@item.designation</td>
-                                                                <td>@item.joblocation</td>
-                                                                <td>@item.interview_mode</td>
-                                                                <td>@item.interview_location</td>
+                                                <td>@item.designation</td>
+                                                <td>@item.joblocation</td>
+                                                <td>@item.interview_mode</td>
+                                                <td>@item.interview_location</td>
                                                                 @if (@context.HttpContext.Session.GetInt32("role") == 1)
                                                                 {
-                                                                    <td>
+                                                <td>
                                                                         <a asp-controller="Company" asp-action="CompanyDetails" class="btn btn-outline-info" asp-route-cid="@item.company_id" asp-route-hid="@item.id">
-                                                                            Info
-                                                                        </a>
-                                                                    </td>
+                                                        Info
+                                                    </a>
+                                                </td>
 
-                                                                    <td>
+                                                <td>
                                                                         @foreach (var student in Model.applications)
-                                                                        {
+                                                    {
                                                                             if (@context.HttpContext.Session.GetInt32("studentid") == student.student_id)
                                                                             {
                                                                                 if (item.id == student.hiring_id)
                                                                                 {
                                                                                     if (student.status == 0)
                                                                                     {
-                                                                                        <p type="button" class="btn btn-primary btn-sm waves-effect waves-light">Applied</p>
-                                                                                    }
+                                                    <p type="button" class="btn btn-primary btn-sm waves-effect waves-light">Applied</p>
+                                                    }
                                                                                     else if (student.status == 1)
-                                                                                    {
-                                                                                        <p type="button" class="btn btn-success btn-sm waves-effect waves-light">Selected</p>
-                                                                                    }
+                                                    {
+                                                    <p type="button" class="btn btn-success btn-sm waves-effect waves-light">Selected</p>
+                                                    }
                                                                                     else if (student.status == 2)
-                                                                                    {
-                                                                                        <p type="button" class="btn btn-danger btn-sm waves-effect waves-light">Rejected</p>
-
-                                                                                    }
+                                                    {
+                                                    <p type="button" class="btn btn-danger btn-sm waves-effect waves-light">Rejected</p>
+                                                    }
                                                                                 }
                                                                             }
                                                                         }
-                                                                    </td>
-                                                                    <td>
+                                                </td>
+                                                <td>
                                                                         @foreach (var student in Model.applications)
-                                                                        {
+                                                    {
                                                                             if (@context.HttpContext.Session.GetInt32("studentid") == student.student_id)
                                                                             {
                                                                                 if (item.id == student.hiring_id)
@@ -126,19 +125,19 @@
                                                                                     if (student.status == 0 || student.status == 1 || student.status == 2)
                                                                                     {
                                                                                         string dateString = @student.created_at;
-                                                                                        DateTime date = DateTime.Parse(dateString);
+                                                        DateTime date = DateTime.Parse(dateString);
 
-                                                                                        string convertedDate = date.ToString("dd MMMM, yyyy");
-                                                                                        Console.WriteLine(convertedDate);
-                                                                                        <p>@convertedDate</p>
-                                                                                    }
+                                                        string convertedDate = date.ToString("dd MMMM, yyyy");
+                                                        Console.WriteLine(convertedDate);
+                                                        <p>@convertedDate</p>
+                                                    }
 
                                                                                 }
                                                                             }
                                                                         }
-                                                                    </td>
+                                                </td>
 
-                                                                <td>
+                                                <td>
                                                                     @foreach (var student in Model.applications)
                                                                     {
                                                                         if (@context.HttpContext.Session.GetInt32("studentid") == student.student_id)
@@ -146,29 +145,29 @@
                                                                             if (item.id == student.hiring_id)
                                                                             {
                                                                                 if (student.status == 0)
-                                                                                {
-                                                                                    <div class="d-flex flex-wrap gap-3 justify-content-center">
-                                                                                        <i style=" color:rgb(91, 115, 232)" class="fas fa-stopwatch fa-lg" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Response Pending! Please wait a bit further."></i>
-                                                                                    </div>
-                                                                                }
+                                                    {
+                                                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                                                        <i style=" color:rgb(91, 115, 232)" class="fas fa-stopwatch fa-lg" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Response Pending! Please wait a bit further."></i>
+                                                    </div>
+                                                    }
                                                                                 if (student.status == 1)
-                                                                                {
-                                                                                    <div class="d-flex flex-wrap gap-3 justify-content-center info">
-                                                                                        <input type="text" class="sid" value="@context.HttpContext.Session.GetInt32("studentid")" hidden>
+                                                    {
+                                                    <div class="d-flex flex-wrap gap-3 justify-content-center info">
+                                                        <input type="text" class="sid" value="@context.HttpContext.Session.GetInt32("studentid")" hidden>
                                                                                         <input type="text" class="hid" value="@student.hiring_id" hidden>
-                                                                                        <!-- Center Modal -->
-                                                                                        <button type="button" class="btn btn-outline-primary moreinfo" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                                            More Info
-                                                                                        </button>
-                                                                                    </div>
-                                                                                }
+                                                        <!-- Center Modal -->
+                                                        <button type="button" class="btn btn-outline-primary moreinfo" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            More Info
+                                                        </button>
+                                                    </div>
+                                                    }
 
                                                                                 if (student.status == 2)
-                                                                                {
-                                                                                    <div class="d-flex flex-wrap gap-3 justify-content-center">
-                                                                                        <i style="color:red;" class="far fa-window-close fa-lg" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Application Rejected"></i>
-                                                                                    </div>
-                                                                                }
+                                                    {
+                                                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                                                        <i style="color:red;" class="far fa-window-close fa-lg" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Application Rejected"></i>
+                                                    </div>
+                                                    }
 
                                                                             }
 
@@ -185,10 +184,10 @@
                                                                         <a asp-controller="Hiring" asp-action="DeleteHiring" class="btn btn-outline-danger" onclick="if(!confirm('Are you sure that you want to permanently delete the selected element?'))return false" asp-route-id="@item.id">
                                                                             Delete
                                                                         </a>
-                                                                    </td>
+                                                </td>
                                                                 }
-                                                            </tr>
-                                                        }
+                                            </tr>
+                                        }
                                                     }
                                                 }
                                             }

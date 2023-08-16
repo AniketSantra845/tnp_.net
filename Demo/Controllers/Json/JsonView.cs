@@ -34,9 +34,9 @@ namespace Demo.Controllers.Json
         [AllowNull]
         public String status { get; set; }
 
-        [JsonProperty("user")]
+        [JsonProperty("userinfo")]
         [AllowNull]
-        public Dictionary<string, string>[] User { get; set; }
+        public User userinfo { get; set; }
 
         [JsonProperty("Users")]
         public List<User> user { get; set; }
@@ -50,9 +50,9 @@ namespace Demo.Controllers.Json
         [JsonProperty("getuser")]
         public List<Insert_User> getuser { get; set; }
 
-        [JsonProperty("sessions")]
+        [JsonProperty("sessioninfo")]
         [AllowNull]
-        public Dictionary<string, string>[] Sessions { get; set; }
+        public Sessions sessioninfo { get; set; }
 
         [JsonProperty("session")]
         public List<Sessions> session { get; set; }
@@ -68,7 +68,7 @@ namespace Demo.Controllers.Json
 
         [JsonProperty("student")]
         [AllowNull]
-        public Dictionary<string, string>[] Student { get; set; }
+        public Student student { get; set; }
 
         //list of data of students
         [JsonProperty("students")]
@@ -100,6 +100,10 @@ namespace Demo.Controllers.Json
         [JsonProperty("hirings")]
         [AllowNull]
         public List<Hiring> hirings { get; set; }
+
+        [JsonProperty("studenthiringdetails")]
+        [AllowNull]
+        public List<StudentViewHiring> studenthiringdetails { get; set; }
 
         [JsonProperty("hiring")]
         public Hiring[] Hiring { get; set; }

@@ -28,6 +28,7 @@
                                         <label for="example-number-input" class=" col-form-label">CIF</label>
                                         <input asp-for="cif" class="form-control" type="text" name="cif" id="cif">
                                         <span asp-validation-for="cif" class="text-danger"></span>
+                                        <span id="valid_com" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-6 col-md-2">
                                         <label for="example-number-input" class=" col-form-label">Company Name</label>
@@ -61,7 +62,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="submit" value="Save" class="btn btn-primary" />
+                                    <input type="submit" value="Save" id="submit" class="btn btn-primary" />
                                     <a asp-action="Index" asp-controller="Company" class="btn btn-outline-primary">Back</a>
                                 </div>
                             </form>  
@@ -76,4 +77,26 @@
     @{
         <partial name="_ValidationScriptsPartial" />
     }
+    <script>
+        $(document).ready(function () {
+            $('#cif').on('input', function () {
+                var input = $(this).val();
+
+                $.ajax({
+                    url: '@Url.Action("validCompany", "Company")',
+                    type: 'GET',
+                    data: { cif: input },
+                    success: function (response) {
+                        if (response.isValid) {
+                            $('#valid_com').html("");
+                            $('#submit').prop("disabled", false);
+                        } else {
+                            $('#valid_com').html("Company with this id number already exists!");
+                            $('#submit').prop("disabled", true);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 }

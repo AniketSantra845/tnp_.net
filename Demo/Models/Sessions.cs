@@ -20,7 +20,7 @@ namespace Demo.Models
         public string label { get; set; }
 
         [ValidateNever]
-        public int default_year { get; set; }
+        public string default_year { get; set; }
 
         [ValidateNever]
         public string status { get; set; }
