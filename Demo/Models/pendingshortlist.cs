@@ -9,6 +9,9 @@ namespace Demo.Models
         [JsonProperty("hiring_id")]
         public int hiring_id { get; set; }
 
+        [JsonProperty("app_id")]
+        public int app_id { get; set; }
+
         [JsonProperty("id")]
         public int id { get; set; }
 

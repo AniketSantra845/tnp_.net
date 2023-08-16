@@ -89,7 +89,7 @@
                                                                         <h5 class="modal-title" id="exampleModalLabel">Student Remuneration  Details</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <form id="selectform" method="post" asp-controller="Hiring" asp-action="pendingshortlisted" asp-route-id=101 asp-route-sid=@item.id asp-route-hid=@item.hiring_id>
+                                                                    <form id="selectform" method="post" asp-controller="Hiring" asp-action="pendingshortlisted" asp-route-id=101 asp-route-app_id=@item.app_id>
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
                                                                                 <label for="exampleInputEmail1" class="form-label" id="dispText">Minimum Stipend</label>
@@ -122,7 +122,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <a asp-controller="Hiring" asp-action="pendingshortlisted" class="btn btn-outline-danger " asp-route-id=201 asp-route-sid=@item.id asp-route-hid=@item.hiring_id>
+                                                        <a asp-controller="Hiring" asp-action="pendingshortlisted" class="btn btn-outline-danger " asp-route-id=201 asp-route-app_id=@item.app_id>
                                                             Reject
                                                         </a>
                                                     </td>

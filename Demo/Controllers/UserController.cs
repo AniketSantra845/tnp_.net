@@ -16,11 +16,10 @@ namespace Demo.Controllers
         public UserController(IHttpContextAccessor httpContextAccessor, IEmailSender emailSender)
         {
             Webapi wb = new Webapi();
-            System.Uri baseAddress = wb.api();
-            client = new HttpClient();
-            client.BaseAddress = baseAddress;
+            client = wb.response();
             context = httpContextAccessor;
             this.emailSender = emailSender;
+
         }
         public IActionResult Role()
         {
@@ -61,6 +60,7 @@ namespace Demo.Controllers
                 return RedirectToAction("Role");
             }
         }
+
         [HttpPost]
         public IActionResult Login(User model, int id)
         {
@@ -70,24 +70,25 @@ namespace Demo.Controllers
                 {
                     String data = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "getlogin", content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "getlogin&role=" + id, content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         String result = response.Content.ReadAsStringAsync().Result;
                         var logindetails = JsonDecode.FromJson(result);
+                        Debug.WriteLine(logindetails);
                         var success = logindetails.Success;
                         if (success)
                         {
-                            int role = Convert.ToInt32(logindetails.User[0]["role"]);
+                            int role = Convert.ToInt32(logindetails.userinfo.role);
                             if (id == role)
                             {
                                 if (role == 1)
                                 {
-                                    int userid = Convert.ToInt32(logindetails.User[0]["id"]);
-                                    int sessionid = Convert.ToInt32(logindetails.Student[0]["session_id"]);
-                                    int studentid = Convert.ToInt32(logindetails.Student[0]["id"]);
-                                    string studentemailid = logindetails.User[0]["email"];
-                                    String studentName = logindetails.Student[0]["first_name"];
+                                    int userid = Convert.ToInt32(logindetails.userinfo.id);
+                                    int sessionid = Convert.ToInt32(logindetails.student.session_id);
+                                    int studentid = Convert.ToInt32(logindetails.student.id);
+                                    string studentemailid = logindetails.userinfo.email;
+                                    String studentName = logindetails.student.first_name;
                                     context.HttpContext.Session.SetInt32("role", role);
                                     context.HttpContext.Session.SetInt32("userid", userid);
                                     context.HttpContext.Session.SetInt32("sessionid", sessionid);
@@ -97,9 +98,9 @@ namespace Demo.Controllers
                                 }
                                 else if (role == 2)
                                 {
-                                    int userid = Convert.ToInt32(logindetails.User[0]["id"]);
-                                    int sessionid = Convert.ToInt32(logindetails.Sessions[0]["id"]);
-                                    string coordinatormailid = logindetails.User[0]["email"];
+                                    int userid = Convert.ToInt32(logindetails.userinfo.id);
+                                    int sessionid = Convert.ToInt32(logindetails.sessioninfo.id);
+                                    string coordinatormailid = logindetails.userinfo.email;
                                     context.HttpContext.Session.SetInt32("role", role);
                                     context.HttpContext.Session.SetInt32("userid", userid);
                                     context.HttpContext.Session.SetInt32("sessionid", sessionid);
@@ -108,6 +109,9 @@ namespace Demo.Controllers
                                 }
                             }
                             else
+                            {
+
+                            }
                             {
                                 if (id == 1)
                                 {
